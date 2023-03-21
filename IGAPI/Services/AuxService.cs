@@ -58,5 +58,25 @@ public class AuxService:IAuxService
             return response;
         }
     }
-    
+
+    public async Task<Response<List<ProjectFullResponse>>> GetProjects()
+    {
+        var response = new Response<List<ProjectFullResponse>>();
+
+        try
+        {
+            var projects = await _unitOfWork.ProjectRepository.GetAll();
+        
+            response.Data = _mapper.Map<List<ProjectFullResponse>>(projects);
+            response.Success = true;
+            response.Message = "Projects retrieved successfully";
+            return response;
+        }catch(Exception e)
+        {
+            response.Data = null;
+            response.Success = false;
+            response.Message = e.Message;
+            return response;
+        }
+    }
 }

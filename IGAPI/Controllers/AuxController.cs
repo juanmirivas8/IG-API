@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IGAPI.Controllers;
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class AuxController:ControllerBase,IAuxController
 {
     private readonly IAuxService _auxService;
@@ -18,15 +18,19 @@ public class AuxController:ControllerBase,IAuxController
         _auxService = auxService;
     }
     
-    [HttpPost("postProject")]
+    [HttpPost("PostProject")]
     public async Task<ActionResult<Response<ProjectFullResponse>>> PostProject([FromBody] ProjectPostRequestDto project)
     {
         var response = await _auxService.PostProject(project);
 
-        if (response.Success)
-        {
-            return Ok(response);
-        }
-        return BadRequest(response);
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
+
+    [HttpGet("GetAllProjects")]
+    public async Task<ActionResult<Response<List<ProjectFullResponse>>>> GetProjects()
+    {
+        var response =await _auxService.GetProjects();
+        
+        return response.Success ? Ok(response) : BadRequest(response);
     }
 }

@@ -46,9 +46,9 @@ public class Repository<T> : IRepository<T> where T : class
         throw new NotImplementedException();
     }
 
-    public Task<List<T>> GetAll()
+    public async Task<List<T>> GetAll()
     {
-        throw new NotImplementedException();
+        return await _dbSet.ToListAsync();
     }
 
     public async Task<List<T>> GetByFilter(Expression<Func<T, bool>> filter)

@@ -7,4 +7,5 @@ namespace IGAPI.Services;
 public interface IAuxService
 {
     Task<Response<ProjectFullResponse>> PostProject(ProjectPostRequestDto project);
+    Task<Response<List<ProjectFullResponse>>> GetProjects();
 }
