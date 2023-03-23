@@ -31,24 +31,20 @@ public class Repository<T> : IRepository<T> where T : class
         return et.Entity;
     }
 
-    public Task<T> Update(T entity)
+    public async Task<T> Update(T entity)
     {
-        throw new NotImplementedException();
+        var et = _dbSet.Update(entity);
+        return et.Entity;
     }
 
-    public Task<T> Delete(T entity)
+    public async Task<T> Delete(T entity)
     {
-        throw new NotImplementedException();
+        return _dbSet.Remove(entity).Entity;
     }
-
-    public Task<T> Delete(int id)
+    
+    public async Task<List<T>> GetAll()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<T>> GetAll()
-    {
-        throw new NotImplementedException();
+        return await _dbSet.ToListAsync();
     }
 
     public async Task<List<T>> GetByFilter(Expression<Func<T, bool>> filter)

@@ -10,7 +10,6 @@ public interface IRepository<T> where T:class
     Task<T> Add(T entity);
     Task<T> Update(T entity);
     Task<T> Delete(T entity);
-    Task<T> Delete(int id);
     Task<List<T>> GetAll();
     
     Task<List<T>> GetByFilter(Expression<Func<T, bool>> filter);
