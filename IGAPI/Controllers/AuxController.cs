@@ -29,8 +29,30 @@ public class AuxController:ControllerBase,IAuxController
     [HttpGet("GetAllProjects")]
     public async Task<ActionResult<Response<List<ProjectFullResponse>>>> GetProjects()
     {
-        var response =await _auxService.GetProjects();
+        var response = await _auxService.GetProjects();
         
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
+
+    [HttpPut("UpdateProject")]
+    public async Task<ActionResult<Response<ProjectFullResponse>>> UpdateProject(ProjectUpdateRequestDto project)
+    {
+        var response = await _auxService.UpdateProject(project);
+        
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
+
+    [HttpDelete("DeleteProject/{id}")]
+    public async Task<ActionResult<Response<ProjectFullResponse>>> DeleteProject(int id)
+    {
+        var response = await _auxService.DeleteProject(id);
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
+
+    [HttpGet("GetProjectById/{id}")]
+    public async Task<ActionResult<Response<ProjectFullResponse>>> GetProjectById(int id)
+    {
+        var response = await _auxService.GetProjectById(id);
         return response.Success ? Ok(response) : BadRequest(response);
     }
 }

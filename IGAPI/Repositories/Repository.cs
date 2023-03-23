@@ -31,21 +31,17 @@ public class Repository<T> : IRepository<T> where T : class
         return et.Entity;
     }
 
-    public Task<T> Update(T entity)
+    public async Task<T> Update(T entity)
     {
-        throw new NotImplementedException();
+        var et = _dbSet.Update(entity);
+        return et.Entity;
     }
 
-    public Task<T> Delete(T entity)
+    public async Task<T> Delete(T entity)
     {
-        throw new NotImplementedException();
+        return _dbSet.Remove(entity).Entity;
     }
-
-    public Task<T> Delete(int id)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public async Task<List<T>> GetAll()
     {
         return await _dbSet.ToListAsync();

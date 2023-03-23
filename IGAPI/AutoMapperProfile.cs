@@ -13,5 +13,6 @@ public class AutoMapperProfile:Profile
         CreateMap<RolEntity, RolFullGetResponseDto>();
         CreateMap<ProjectPostRequestDto, ProjectEntity>();
         CreateMap<ProjectEntity, ProjectFullResponse>();
+        CreateMap<ProjectUpdateRequestDto, ProjectEntity>();
     }
 }
