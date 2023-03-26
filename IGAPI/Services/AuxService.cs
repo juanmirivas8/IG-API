@@ -1,8 +1,9 @@
 using AutoMapper;
+using IGAPI.Dtos;
 using IGAPI.Dtos.Project;
 using IGAPI.Models;
-using IGAPI.Repositories;
-using Microsoft.EntityFrameworkCore;
+using IGAPI.Repositories.Interfaces;
+using IGAPI.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IGAPI.Services;
@@ -66,7 +67,7 @@ public class AuxService:IAuxService
         try
         {
             var projects = await _unitOfWork.ProjectRepository.GetAll();
-        
+
             response.Data = _mapper.Map<List<ProjectFullResponse>>(projects);
             response.Success = true;
             response.Message = "Projects retrieved successfully";

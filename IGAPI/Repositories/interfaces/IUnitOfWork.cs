@@ -1,6 +1,6 @@
 using IGAPI.Models;
 
-namespace IGAPI.Repositories;
+namespace IGAPI.Repositories.Interfaces;
 
 public interface IUnitOfWork
 { 

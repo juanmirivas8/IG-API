@@ -1,6 +1,9 @@
 using IGAPI;
+using IGAPI.Models;
 using IGAPI.Repositories;
+using IGAPI.Repositories.Interfaces;
 using IGAPI.Services;
+using IGAPI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,8 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuxService,AuxService>();
+
+builder.Services.AddScoped<IRepository<ProjectEntity>,ProjectRepository>();
 //Adding generic repository
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

@@ -1,8 +1,8 @@
+using IGAPI.Dtos;
 using IGAPI.Dtos.Project;
-using IGAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IGAPI.Controllers;
+namespace IGAPI.Controllers.Interfaces;
 
 public interface IAuxController
 {

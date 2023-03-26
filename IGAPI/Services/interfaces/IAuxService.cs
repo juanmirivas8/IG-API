@@ -1,8 +1,7 @@
-
+using IGAPI.Dtos;
 using IGAPI.Dtos.Project;
-using IGAPI.Models;
 
-namespace IGAPI.Services;
+namespace IGAPI.Services.Interfaces;
 
 public interface IAuxService
 {

@@ -1,7 +1,7 @@
 
 using System.Linq.Expressions;
 
-namespace IGAPI.Repositories;
+namespace IGAPI.Repositories.Interfaces;
 
 public interface IRepository<T> where T:class
 {
