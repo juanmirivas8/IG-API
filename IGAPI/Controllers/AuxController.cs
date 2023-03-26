@@ -1,7 +1,9 @@
+using IGAPI.Controllers.Interfaces;
 using IGAPI.Dtos.Project;
-using IGAPI.Models;
+using IGAPI.Dtos;
 using IGAPI.Repositories;
-using IGAPI.Services;
+using IGAPI.Repositories.Interfaces;
+using IGAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 

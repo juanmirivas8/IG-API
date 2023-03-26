@@ -1,4 +1,4 @@
-namespace IGAPI.Models;
+namespace IGAPI.Dtos;
 
 public class Response<T>
 {
