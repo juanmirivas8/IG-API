@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace IGAPI.Models;
@@ -11,4 +12,23 @@ public class AreaEntity
     public string Name { get; set; }
     public virtual ProjectEntity Project { get; set; }
     public int ProjectId { get; set; }
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        return Name == ((AreaEntity)obj).Name;
+    }
+    
+    public override int GetHashCode()
+    {
+        return Name.GetHashCode();
+    }
+    public override string ToString()
+    {
+        return $"{Name} - {ProjectId} - {Id}";
+    }
 }

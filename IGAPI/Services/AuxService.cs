@@ -42,6 +42,16 @@ public class AuxService:IAuxService
 
             return response;
         }
+        
+        // Check if areas are unique
+        if (projectEntity.Areas.Count != projectEntity.Areas.Distinct().Count())
+        {
+            response.Data = null;
+            response.Success = false;
+            response.Message = $"Project {projectEntity.Name} areas must be unique";
+
+            return response;
+        }
 
         try
         {
