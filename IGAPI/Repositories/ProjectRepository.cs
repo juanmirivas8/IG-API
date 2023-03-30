@@ -12,7 +12,11 @@ public class ProjectRepository : Repository<ProjectEntity>, IProjectRepository
 
     public override async Task<List<ProjectEntity>> GetAll()
     {
-        Console.WriteLine("ProjectRepository.GetAll()");
         return await _dbSet.Include(x=> x.Areas).ToListAsync();
+    }
+
+    public override async Task<ProjectEntity?> GetById(int id)
+    {
+        return await _dbSet.Include(x=> x.Areas).FirstOrDefaultAsync(x => x.Id == id);
     }
 }

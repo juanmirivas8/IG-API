@@ -4,7 +4,7 @@ namespace IGAPI.Repositories.Interfaces;
 
 public interface IUnitOfWork
 { 
-    IRepository<ProjectEntity> ProjectRepository { get; }
+    IProjectRepository ProjectRepository { get; }
     Task<int> SaveChangesAsync();
     void Dispose();
 }

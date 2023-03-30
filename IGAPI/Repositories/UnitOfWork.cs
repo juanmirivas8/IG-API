@@ -6,8 +6,8 @@ namespace IGAPI.Repositories;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly DataContext _context;
-    public IRepository<ProjectEntity> ProjectRepository { get; }
-    public UnitOfWork(IRepository<ProjectEntity> projectRepository, DataContext context)
+    public IProjectRepository ProjectRepository { get; }
+    public UnitOfWork(IProjectRepository projectRepository, DataContext context)
     {
         ProjectRepository = projectRepository;
         _context = context;
