@@ -1,11 +1,10 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace IGAPI.Models;
 
-[Index(nameof(Name), IsUnique = true)]
-public class ProjectEntity
+[Table("SubRoles")]
+public class SubRolEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
