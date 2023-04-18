@@ -85,10 +85,10 @@ public class AuxServiceTests
             int id = 1;
             p.Name = p.Name;
             p.Id = 1;
-            p.Areas = p.Areas;
+            //p.Areas = p.Areas;
             
-            p.Areas.ForEach(x => x.ProjectId = 1);
-            p.Areas.ForEach(x => x.Id = id++);
+           // p.Areas.ForEach(x => x.ProjectId = 1);
+            //p.Areas.ForEach(x => x.Id = id++);
             return p;
         });
         projectRepository.Setup(x => x.GetByFilter(It.IsAny<Expression<Func<ProjectEntity, bool>>>()))
@@ -110,7 +110,5 @@ public class AuxServiceTests
         Assert.True(response.Result.Success);
         Assert.NotNull(response.Result.Data);
     }
-    
-    [Theory]
-    
+
 }
