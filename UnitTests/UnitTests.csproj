@@ -26,4 +26,8 @@
       <ProjectReference Include="..\IGAPI\IGAPI.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="AuxServiceTests.cs" />
+    </ItemGroup>
+
 </Project>

@@ -15,7 +15,7 @@ public class ProjectRepository : Repository<ProjectEntity>, IProjectRepository
         return await _dbSet.ToListAsync();
     }
 
-    public override async Task<ProjectEntity?> GetById(int id)
+    public override async Task<ProjectEntity?> GetById(Guid id)
     {
         return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
     }

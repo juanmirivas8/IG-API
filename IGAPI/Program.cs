@@ -1,9 +1,6 @@
 using IGAPI;
-using IGAPI.Models;
 using IGAPI.Repositories;
 using IGAPI.Repositories.Interfaces;
-using IGAPI.Services;
-using IGAPI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +10,6 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(build
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IAuxService,AuxService>();
 
 builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
 //Adding generic repository
