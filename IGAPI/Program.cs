@@ -11,7 +11,6 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<IProjectRepository,ProjectRepository>();
 //Adding generic repository
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
