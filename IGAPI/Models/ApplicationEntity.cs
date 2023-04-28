@@ -7,7 +7,7 @@ public class ApplicationEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public virtual CandidateEntity Candidate { get; set; }
     public virtual PositionEntity Position { get; set; }
     public virtual ApplicationStatusEntity Status { get; set; }

@@ -20,7 +20,7 @@ public class Repository<T> : IRepository<T> where T : class
         return _dbSet;
     }
     
-    public virtual async Task<T?> GetById(Guid id)
+    public virtual async Task<T?> GetById(int id)
     {
         return await _dbSet.FindAsync(id);
     }
@@ -43,12 +43,12 @@ public class Repository<T> : IRepository<T> where T : class
         return _dbSet.Remove(entity).Entity;
     }
     
-    public virtual async Task<List<T>> GetAll()
+    public virtual async Task<IEnumerable<T>> GetAll()
     {
         return await _dbSet.ToListAsync();
     }
 
-    public virtual async Task<List<T>> GetByFilter(Expression<Func<T, bool>> filter)
+    public virtual async Task<IEnumerable<T>> GetByFilter(Expression<Func<T, bool>> filter)
     {
         return await _dbSet.Where(filter).ToListAsync();
     }

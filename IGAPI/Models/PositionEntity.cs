@@ -9,7 +9,7 @@ public class PositionEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public virtual ProjectEntity Project { get; set; }
     public virtual AreaEntity Area { get; set; }
     public virtual RolEntity Rol { get; set; }

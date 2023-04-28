@@ -1,4 +1,3 @@
-using IGAPI.Models;
 using IGAPI.Repositories.Interfaces;
 
 namespace IGAPI.Repositories;

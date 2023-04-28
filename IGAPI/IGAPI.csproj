@@ -20,9 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\interfaces" />
       <Folder Include="Dtos\Candidate\" />
-      <Folder Include="Services\interfaces" />
     </ItemGroup>
 
 </Project>

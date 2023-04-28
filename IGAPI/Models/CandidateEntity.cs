@@ -9,7 +9,7 @@ public class CandidateEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public char Surname { get; set; }
     public string Login { get; set; }
