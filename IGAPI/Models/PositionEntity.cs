@@ -16,12 +16,13 @@ public class PositionEntity
     public virtual SubRolEntity SubRol { get; set; }
     public virtual LocalizationEntity Localization { get; set; }
     public virtual PositionStatusEntity Status { get; set; }
-    public string Description { get; set; } = string.Empty;
-    public int Vacancies { get; set; } = 1;
+    public string Description { get; set; } 
+    public int Vacancies { get; set; }
     [DataType(DataType.Date)]
     public DateTime CreationDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime ClosingDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime LastUpdate { get; set; }
+    public virtual IEnumerable<ApplicationEntity> Applications { get; set; }
 }

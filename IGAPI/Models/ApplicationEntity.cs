@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGAPI.Models;
-
+[Table("Applications")]
 public class ApplicationEntity
 {
     [Key]
@@ -13,5 +13,5 @@ public class ApplicationEntity
     public virtual ApplicationStatusEntity Status { get; set; }
     public string RejectionReason { get; set; }
     public string Description { get; set; }
-    public int TechnicalTestId { get; set; }
+    // TO IMPLEMENT:TECHNICAL TEST PDF REFERENCE
 }
