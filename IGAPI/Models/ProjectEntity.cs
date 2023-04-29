@@ -3,8 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace IGAPI.Models;
-
-[Index(nameof(Name), IsUnique = true)]
+[Table("Projects")]
 public class ProjectEntity
 {
     [Key]

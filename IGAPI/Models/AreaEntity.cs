@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace IGAPI.Models;
-
+[Table("Areas")]
 public class AreaEntity
 {
     [Key]
