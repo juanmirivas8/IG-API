@@ -2,6 +2,7 @@
 {
     public class AreaResponseDto
     {
-        //TODO
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

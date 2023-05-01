@@ -2,6 +2,6 @@
 {
     public class PositionStatusResponseDto
     {
-        //TODO
-    }
+        public int Id { get; set; }
+        public string Name { get; set; }    }
 }
