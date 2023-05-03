@@ -15,11 +15,12 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<SubRolEntity> SubRolRepository { get; }
     public IRepository<ProjectEntity> ProjectRepository { get; }
     public IRepository<AreaEntity> AreaRepository { get; }
+    public IRepository<UserEntity> UserRepository { get; }
 
     public UnitOfWork(DataContext context,IRepository<LocalizationEntity> localizationRepository,IRepository<ContactMethodEntity> contactMethodRepository,
         IRepository<CandidateStatusEntity> candidateStatusRepository,IRepository<ApplicationStatusEntity> applicationStatusRepository,
         IRepository<PositionStatusEntity> positionStatusRepository, IRepository<RolEntity> rolRepository, IRepository<SubRolEntity> subRolRepository,
-        IRepository<ProjectEntity> projectRepository,IRepository<AreaEntity> areaRepository)
+        IRepository<ProjectEntity> projectRepository,IRepository<AreaEntity> areaRepository, IRepository<UserEntity> userRepository)
     {
         _context = context;
         LocalizationRepository = localizationRepository;
@@ -31,6 +32,7 @@ public class UnitOfWork : IUnitOfWork
         SubRolRepository = subRolRepository;
         ProjectRepository = projectRepository;
         AreaRepository = areaRepository;
+        UserRepository = userRepository;
     }
 
     public async Task<int> SaveChangesAsync()

@@ -13,6 +13,7 @@ public interface IUnitOfWork
     IRepository<SubRolEntity> SubRolRepository { get; }
     IRepository<ProjectEntity> ProjectRepository { get; }
     IRepository<AreaEntity> AreaRepository { get; }
+    IRepository<UserEntity> UserRepository { get; }
     Task<int> SaveChangesAsync();
     void Dispose();
 }
