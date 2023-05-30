@@ -4,6 +4,7 @@ namespace IGAPI.Repositories.Interfaces;
 
 public interface IUnitOfWork
 {
+    DataContext Context { get; }
     IRepository<LocalizationEntity> LocalizationRepository { get; }
     IRepository<ContactMethodEntity> ContactMethodRepository { get; }
     IRepository<CandidateStatusEntity> CandidateStatusRepository { get; }
@@ -13,6 +14,8 @@ public interface IUnitOfWork
     IRepository<SubRolEntity> SubRolRepository { get; }
     IRepository<ProjectEntity> ProjectRepository { get; }
     IRepository<AreaEntity> AreaRepository { get; }
+    IRepository<UserEntity> UserRepository { get; }
+    IPositionRepository PositionRepository { get; }
     Task<int> SaveChangesAsync();
     void Dispose();
 }

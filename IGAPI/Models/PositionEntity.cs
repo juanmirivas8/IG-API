@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 
 namespace IGAPI.Models;
@@ -16,7 +18,7 @@ public class PositionEntity
     public virtual SubRolEntity SubRol { get; set; }
     public virtual LocalizationEntity Localization { get; set; }
     public virtual PositionStatusEntity Status { get; set; }
-    public string Description { get; set; } 
+    public string Description { get; set; }
     public int Vacancies { get; set; }
     [DataType(DataType.Date)]
     public DateTime CreationDate { get; set; }
