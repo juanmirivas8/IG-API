@@ -5,7 +5,7 @@ namespace IGAPI.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly DataContext _context;
+    public DataContext Context { get; }
     public IRepository<LocalizationEntity> LocalizationRepository { get; }
     public IRepository<ContactMethodEntity> ContactMethodRepository { get; }
     public IRepository<CandidateStatusEntity> CandidateStatusRepository { get; }
@@ -16,13 +16,15 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<ProjectEntity> ProjectRepository { get; }
     public IRepository<AreaEntity> AreaRepository { get; }
     public IRepository<UserEntity> UserRepository { get; }
+    public IPositionRepository PositionRepository { get; }
 
     public UnitOfWork(DataContext context,IRepository<LocalizationEntity> localizationRepository,IRepository<ContactMethodEntity> contactMethodRepository,
         IRepository<CandidateStatusEntity> candidateStatusRepository,IRepository<ApplicationStatusEntity> applicationStatusRepository,
         IRepository<PositionStatusEntity> positionStatusRepository, IRepository<RolEntity> rolRepository, IRepository<SubRolEntity> subRolRepository,
-        IRepository<ProjectEntity> projectRepository,IRepository<AreaEntity> areaRepository, IRepository<UserEntity> userRepository)
+        IRepository<ProjectEntity> projectRepository,IRepository<AreaEntity> areaRepository, IRepository<UserEntity> userRepository,
+        IPositionRepository positionRepository)
     {
-        _context = context;
+        Context = context;
         LocalizationRepository = localizationRepository;
         ContactMethodRepository = contactMethodRepository;
         CandidateStatusRepository = candidateStatusRepository;
@@ -33,15 +35,16 @@ public class UnitOfWork : IUnitOfWork
         ProjectRepository = projectRepository;
         AreaRepository = areaRepository;
         UserRepository = userRepository;
+        PositionRepository = positionRepository;
     }
 
     public async Task<int> SaveChangesAsync()
     {
-        return await _context.SaveChangesAsync();
+        return await Context.SaveChangesAsync();
     }
 
     public void Dispose()
     {
-        _context.Dispose();
+        Context.Dispose();
     }
 }

@@ -6,5 +6,6 @@ namespace IGAPI.Controllers.interfaces;
 
 public interface IAuthController
 {
-    Task<ActionResult<Response<bool>>> Register(UserDto user);
+    Task<ActionResult<Response<bool>>> Register(UserRequestDto userRequest);
+    Task<ActionResult<Response<UserResponseDto>>> Login(UserRequestDto userRequest); 
 }
