@@ -19,11 +19,10 @@ public class LookUpController: ControllerBase,ILookUpController
         _lookUpService = lookUpService;
     }
     
-    [HttpGet("GetAllLocalizations")]
-    public async Task<ActionResult<Response<IEnumerable<LocalizationResponseDto>>>> GetAllLocalizations()
+    [HttpGet("GetAllLookUps")]
+    public async Task<ActionResult<Response<IEnumerable<ObjectWithKey>>>> GetAllLookUps()
     {
-        var response = await _lookUpService.GetAllLocalizations();
-
+        var response = await _lookUpService.GetAllLookUps();
         return response.Success ? Ok(response) : BadRequest(response);
     }
 }

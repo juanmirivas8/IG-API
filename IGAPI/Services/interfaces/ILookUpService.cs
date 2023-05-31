@@ -6,5 +6,5 @@ namespace IGAPI.Services.interfaces;
 
 public interface ILookUpService
 {
-    Task<Response<IEnumerable<LocalizationResponseDto>>> GetAllLocalizations();
+    Task<Response<IEnumerable<ObjectWithKey>>> GetAllLookUps();
 }

@@ -6,5 +6,5 @@ namespace IGAPI.Controllers.interfaces;
 
 public interface ILookUpController
 {
-   Task<ActionResult<Response<IEnumerable<LocalizationResponseDto>>>> GetAllLocalizations();
+   Task<ActionResult<Response<IEnumerable<ObjectWithKey>>>> GetAllLookUps();
 }
