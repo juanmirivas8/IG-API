@@ -1,6 +1,8 @@
 using AutoMapper;
+using IGAPI.Dtos.Application;
 using IGAPI.Dtos.ApplicationStatus;
 using IGAPI.Dtos.Area;
+using IGAPI.Dtos.Candidate;
 using IGAPI.Dtos.CandidateStatus;
 using IGAPI.Dtos.Localization;
 using IGAPI.Dtos.Position;
@@ -26,7 +28,16 @@ public class AutoMapperProfile:Profile
         CreateMap<RolEntity, RolResponseDto>().ReverseMap();
         CreateMap<SubRolEntity, SubRolResponseDto>().ReverseMap();
         
-        CreateMap<PositionPostDto, PositionEntity>().ReverseMap();
+        CreateMap<PositionPostDto, PositionEntity>();
+        CreateMap<PositionPutDto, PositionEntity>();
         CreateMap<PositionEntity, PositionResponseDto>();
+        
+        CreateMap<ApplicationPostDto, ApplicationEntity>();
+        CreateMap<ApplicationPutDto, ApplicationEntity>();
+        CreateMap<ApplicationEntity, ApplicationResponseDto>();
+        
+        CreateMap<CandidatePostDto, CandidateEntity>();
+        CreateMap<CandidatePutDto, CandidateEntity>();
+        CreateMap<CandidateEntity, CandidateResponseDto>();
     }
 }

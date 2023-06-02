@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization;
+
 
 
 namespace IGAPI.Models;
@@ -23,7 +22,7 @@ public class PositionEntity
     [DataType(DataType.Date)]
     public DateTime CreationDate { get; set; }
     [DataType(DataType.Date)]
-    public DateTime ClosingDate { get; set; }
+    public DateTime? ClosingDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime LastUpdate { get; set; }
     public virtual IEnumerable<ApplicationEntity> Applications { get; set; }
