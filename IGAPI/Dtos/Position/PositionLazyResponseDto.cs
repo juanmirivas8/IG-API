@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using IGAPI.Dtos.Application;
 using IGAPI.Dtos.Area;
 using IGAPI.Dtos.Localization;
 using IGAPI.Dtos.PositionStatus;
@@ -9,8 +8,9 @@ using IGAPI.Dtos.SubRol;
 
 namespace IGAPI.Dtos.Position;
 
-public class PositionPostDto
+public class PositionLazyResponseDto
 {
+    public int Id { get; set; }
     public ProjectResponseDto Project { get; set; }
     public AreaResponseDto Area { get; set; }
     public RolResponseDto Rol { get; set; }
@@ -25,6 +25,4 @@ public class PositionPostDto
     public DateTime? ClosingDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime LastUpdate { get; set; }
-    public IEnumerable<ApplicationPostDto> Applications { get; set; }
 }
-

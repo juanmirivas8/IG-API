@@ -18,4 +18,7 @@ public interface IUnitOfWork
     IPositionRepository PositionRepository { get; }
     Task<int> SaveChangesAsync();
     void Dispose();
+    void Attach(PositionEntity positionEntity);
+    void Attach(CandidateEntity candidateEntity);
+    void Attach(ApplicationEntity applicationEntity);
 }
