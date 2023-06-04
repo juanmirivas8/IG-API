@@ -2,12 +2,12 @@
 using IGAPI.Dtos.Application;
 using IGAPI.Dtos.CandidateStatus;
 using IGAPI.Dtos.ContactMethod;
-using IGAPI.Models;
 
 namespace IGAPI.Dtos.Candidate;
 
-public class CandidatePostDto
+public class CandidateResponseDto
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public char Surname { get; set; }
     public string Description { get; set; }
@@ -21,6 +21,5 @@ public class CandidatePostDto
     public DateTime TechnicalTestDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime FirstContactDate { get; set; }
-    public virtual IEnumerable<ApplicationPostDto> Applications { get; set; }
+    public virtual IEnumerable<ApplicationResponseDto> Applications { get; set; }
 }
-

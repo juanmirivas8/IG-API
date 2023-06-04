@@ -19,7 +19,7 @@ public class AuthController: ControllerBase, IAuthController
         _unitOfWork = unitOfWork;
         _authService = authService;
     }
-    [HttpPost("Register"),Authorize]
+    [HttpPost("Register")]
     public async Task<ActionResult<Response<bool>>> Register([FromBody]UserRequestDto userRequest)
     {
         var response = await _authService.Register(userRequest);

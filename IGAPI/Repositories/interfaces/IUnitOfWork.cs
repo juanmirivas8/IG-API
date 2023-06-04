@@ -16,6 +16,8 @@ public interface IUnitOfWork
     IRepository<AreaEntity> AreaRepository { get; }
     IRepository<UserEntity> UserRepository { get; }
     IPositionRepository PositionRepository { get; }
+    ICandidateRepository CandidateRepository { get; }
+    IApplicationRepository ApplicationRepository { get; }
     Task<int> SaveChangesAsync();
     void Dispose();
 }

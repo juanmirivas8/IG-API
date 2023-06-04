@@ -17,9 +17,13 @@ public class DataContext: DbContext
     public DbSet<PositionStatusEntity> PositionStatus { get; set; }
     public DbSet<RolEntity> Roles { get; set; }
     public DbSet<SubRolEntity> SubRoles { get; set; }
+    public DbSet<ContactMethodEntity> ContactMethods { get; set; }
     public DbSet<UserEntity> Users { get; set; }
 
-
+    public bool Exists<T>(T entity) where T : class
+    {
+        return this.Set<T>().Local.Any(e => e.Equals(entity));
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CandidateStatusEntity>().HasData(

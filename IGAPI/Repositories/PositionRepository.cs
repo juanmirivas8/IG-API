@@ -1,5 +1,6 @@
 using IGAPI.Models;
 using IGAPI.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace IGAPI.Repositories;
 

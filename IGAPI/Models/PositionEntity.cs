@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization;
+
 
 
 namespace IGAPI.Models;
@@ -23,8 +22,27 @@ public class PositionEntity
     [DataType(DataType.Date)]
     public DateTime CreationDate { get; set; }
     [DataType(DataType.Date)]
-    public DateTime ClosingDate { get; set; }
+    public DateTime? ClosingDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime LastUpdate { get; set; }
     public virtual IEnumerable<ApplicationEntity> Applications { get; set; }
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+        PositionEntity position = (PositionEntity)obj;
+        return (Id == position.Id);
+    }
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 23 + Id.GetHashCode();
+            return hash;
+        }
+    }
 }

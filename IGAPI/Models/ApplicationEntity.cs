@@ -14,4 +14,23 @@ public class ApplicationEntity
     public string RejectionReason { get; set; }
     public string Description { get; set; }
     // TO IMPLEMENT:TECHNICAL TEST PDF REFERENCE
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+        ApplicationEntity applicationEntity = (ApplicationEntity)obj;
+        return (Id == applicationEntity.Id);
+    }
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 23 + Id.GetHashCode();
+            return hash;
+        }
+    }
 }

@@ -24,4 +24,23 @@ public class CandidateEntity
     public DateTime FirstContactDate { get; set; }
     public virtual IEnumerable<ApplicationEntity> Applications { get; set; }
     // TO IMPLEMENT: LIST OF DOCUMENTS
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+        CandidateEntity candidate = (CandidateEntity)obj;
+        return (Id == candidate.Id);
+    }
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 23 + Id.GetHashCode();
+            return hash;
+        }
+    }
 }
