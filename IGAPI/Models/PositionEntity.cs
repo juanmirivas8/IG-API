@@ -11,11 +11,17 @@ public class PositionEntity
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+    public int ProjectId { get; set; }
     public virtual ProjectEntity Project { get; set; }
+    public int AreaId { get; set; }
     public virtual AreaEntity Area { get; set; }
+    public int RolId { get; set; }
     public virtual RolEntity Rol { get; set; }
+    public int SubRolId { get; set; }
     public virtual SubRolEntity SubRol { get; set; }
+    public int LocalizationId { get; set; }
     public virtual LocalizationEntity Localization { get; set; }
+    public int StatusId { get; set; }
     public virtual PositionStatusEntity Status { get; set; }
     public string Description { get; set; }
     public int Vacancies { get; set; }
