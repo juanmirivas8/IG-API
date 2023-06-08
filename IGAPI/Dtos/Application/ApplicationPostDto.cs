@@ -1,7 +1,7 @@
 ﻿using IGAPI.Dtos.ApplicationStatus;
 using IGAPI.Dtos.Candidate;
 using IGAPI.Dtos.Position;
-using IGAPI.Models;
+
 
 namespace IGAPI.Dtos.Application
 {

@@ -12,7 +12,9 @@ public class CandidateEntity
     public string Name { get; set; }
     public char Surname { get; set; }
     public string Description { get; set; }
+    public int StatusId { get; set; }
     public virtual CandidateStatusEntity Status { get; set; }
+    public int ContactMethodId { get; set; }
     public virtual ContactMethodEntity ContactMethod { get; set; }
     [DataType(DataType.Date)]
     public DateTime CvDate { get; set; }
