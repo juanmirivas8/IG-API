@@ -29,14 +29,20 @@ public class AutoMapperProfile:Profile
         CreateMap<RolEntity, RolResponseDto>().ReverseMap();
         CreateMap<SubRolEntity, SubRolResponseDto>().ReverseMap();
         CreateMap<ContactMethodEntity, ContactMethodResponseDto>().ReverseMap();
-        
+
         CreateMap<PositionPostDto, PositionEntity>()
             .ForMember(dest => dest.ProjectId, opt => opt.MapFrom(src => src.Project.Id))
             .ForMember(dest => dest.AreaId, opt => opt.MapFrom(src => src.Area.Id))
             .ForMember(dest => dest.RolId, opt => opt.MapFrom(src => src.Rol.Id))
             .ForMember(dest => dest.SubRolId, opt => opt.MapFrom(src => src.SubRol.Id))
             .ForMember(dest => dest.LocalizationId, opt => opt.MapFrom(src => src.Localization.Id))
-            .ForMember(dest => dest.StatusId, opt => opt.MapFrom(src => src.Status.Id));
+            .ForMember(dest => dest.StatusId, opt => opt.MapFrom(src => src.Status.Id))
+            .ForMember(dest => dest.Localization, opt => opt.Ignore())
+            .ForMember(dest => dest.Area, opt => opt.Ignore())
+            .ForMember(dest => dest.Project, opt => opt.Ignore())
+            .ForMember(dest => dest.Rol, opt => opt.Ignore())
+            .ForMember(dest => dest.SubRol, opt => opt.Ignore())
+            .ForMember(dest => dest.Status, opt => opt.Ignore());
         CreateMap<PositionPutDto, PositionEntity>()
             .ForMember(dest => dest.ProjectId, opt => opt.MapFrom(src => src.Project.Id))
             .ForMember(dest => dest.AreaId, opt => opt.MapFrom(src => src.Area.Id))
