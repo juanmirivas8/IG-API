@@ -25,8 +25,6 @@ public class PositionService:Service,IPositionService
         }
         var entityFromInsert = await _unitOfWork.PositionRepository.Add(positionEntity);
         await _unitOfWork.SaveChangesAsync();
-        
-        var entityFromDB = await _unitOfWork.PositionRepository.GetById(entityFromInsert.Id);
         var positionResponseDto = _mapper.Map<PositionResponseDto>(entityFromInsert);
         
         return new Response<PositionResponseDto>
