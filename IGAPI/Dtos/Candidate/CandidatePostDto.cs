@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using IGAPI.Dtos.Application;
 using IGAPI.Dtos.CandidateStatus;
 using IGAPI.Dtos.ContactMethod;
