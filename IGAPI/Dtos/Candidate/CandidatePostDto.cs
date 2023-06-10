@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using IGAPI.Dtos.Application;
 using IGAPI.Dtos.CandidateStatus;
 using IGAPI.Dtos.ContactMethod;
@@ -11,8 +12,10 @@ public class CandidatePostDto
     public string Name { get; set; }
     public char Surname { get; set; }
     public string Description { get; set; }
-    public virtual CandidateStatusResponseDto Status { get; set; }
-    public virtual ContactMethodResponseDto ContactMethod { get; set; }
+    [JsonIgnore]
+    public virtual CandidateStatusResponseDto? Status { get; set; }
+    [JsonIgnore]
+    public virtual ContactMethodResponseDto? ContactMethod { get; set; }
     [DataType(DataType.Date)]
     public DateTime CvDate { get; set; }
     [DataType(DataType.Date)]
@@ -21,6 +24,7 @@ public class CandidatePostDto
     public DateTime TechnicalTestDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime FirstContactDate { get; set; }
-    public virtual IEnumerable<ApplicationPostDto> Applications { get; set; }
+    [JsonIgnore]
+    public virtual IEnumerable<ApplicationPostDto>? Applications { get; set; }
 }
 

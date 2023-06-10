@@ -9,5 +9,5 @@ public interface ICandidateService
     Task<Response<CandidateResponseDto>> Create(CandidatePostDto candidateDto);
     Task<Response<CandidateResponseDto>> Update(CandidatePutDto candidateDto);
     Task<Response<CandidateResponseDto>> Delete(CandidatePutDto candidateDto);
-    Task<Response<IEnumerable<CandidateResponseDto>>> GetAll()
+    Task<Response<IEnumerable<CandidateResponseDto>>> GetAll();
 }

@@ -5,9 +5,10 @@ using IGAPI.Services.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IGAPI.Controllers;
+
 [ApiController]
 [Route("[controller]")]
-public class ApplicationController: ControllerBase, IApplicationController
+public class ApplicationController: ControllerBase,IApplicationController
 {
     private readonly IApplicationService _applicationService;
     public ApplicationController(IApplicationService applicationService) 
