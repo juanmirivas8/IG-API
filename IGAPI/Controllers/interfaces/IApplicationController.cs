@@ -8,6 +8,6 @@ public interface IApplicationController
 {
     Task<ActionResult<Response<ApplicationResponseDto>>> Create(ApplicationPostDto application);
     Task<ActionResult<Response<ApplicationResponseDto>>> Update(ApplicationPutDto application);
-    Task<ActionResult<Response<ApplicationResponseDto>>> Delete(ApplicationPutDto application);
+    Task<ActionResult<Response<ApplicationResponseDto>>> Delete(int id);
     Task<ActionResult<Response<ApplicationResponseDto>>> GetAll();
 }

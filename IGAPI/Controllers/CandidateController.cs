@@ -33,10 +33,10 @@ public class CandidateController:ControllerBase,ICandidateController
     }
 
     [HttpDelete]
-    [Route("Delete")]
-    public async Task<ActionResult<Response<CandidateResponseDto>>> Delete([FromBody] CandidatePutDto candidate)
+    [Route("Delete/{id}")]
+    public async Task<ActionResult<Response<CandidateResponseDto>>> Delete(int id)
     {
-        var response = await _candidateService.Delete(candidate);
+        var response = await _candidateService.Delete(id);
         return response.Success ? Ok(response) : BadRequest(response);
     }
 

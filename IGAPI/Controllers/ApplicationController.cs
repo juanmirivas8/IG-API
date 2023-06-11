@@ -1,3 +1,4 @@
+using AutoMapper.Configuration.Conventions;
 using IGAPI.Controllers.interfaces;
 using IGAPI.Dtos;
 using IGAPI.Dtos.Application;
@@ -25,10 +26,10 @@ public class ApplicationController: ControllerBase,IApplicationController
     }
 
     [HttpDelete]
-    [Route("Delete")]
-    public async Task<ActionResult<Response<ApplicationResponseDto>>> Delete([FromBody] ApplicationPutDto application)
+    [Route("Delete/{id}")]
+    public async Task<ActionResult<Response<ApplicationResponseDto>>> Delete(int id)
     {
-        var response = await _applicationService.Delete(application);
+        var response = await _applicationService.Delete(id);
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
@@ -40,7 +41,7 @@ public class ApplicationController: ControllerBase,IApplicationController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpPut]
+    [HttpGet]
     [Route("GetAll")]
     public async Task<ActionResult<Response<ApplicationResponseDto>>> GetAll()
     {
