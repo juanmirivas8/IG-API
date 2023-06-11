@@ -62,7 +62,7 @@ public class CandidateService :Service, ICandidateService
             return new Response<IEnumerable<CandidateResponseDto>>
             {
                 Message = "Operacion fallida",
-                Success = false
+                Success = true
             };
         }
     }
@@ -77,13 +77,12 @@ public class CandidateService :Service, ICandidateService
         var candidateEntity = _mapper.Map<CandidateEntity>(candidateDto);
         var candidateUpdated = await _unitOfWork.CandidateRepository.Update(candidateEntity);
         await _unitOfWork.SaveChangesAsync();
-        candidateUpdated.Status = await _unitOfWork.CandidateStatusRepository.GetById(candidateUpdated.StatusId);
-        candidateUpdated.ContactMethod = await _unitOfWork.ContactMethodRepository.GetById(candidateUpdated.ContactMethodId);
-        var candidateResponse = _mapper.Map<CandidateResponseDto>(candidateUpdated);
+      
+        var candidateFromDB = await _unitOfWork.CandidateRepository.GetById(candidateUpdated.Id);
 
         return new Response<CandidateResponseDto>
         {
-            Data = candidateResponse,
+            Data = _mapper.Map<CandidateResponseDto>(candidateFromDB),
             Message = "Candidato actualizado con exito" ,
             Success = true
         };

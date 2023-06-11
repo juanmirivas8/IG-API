@@ -60,7 +60,7 @@ public class ApplicationService: Service,IApplicationService
             return new Response<IEnumerable<ApplicationResponseDto>>
             {
                 Message = "Operacion fallida",
-                Success = false
+                Success = true
             };
         }
        
@@ -95,10 +95,10 @@ public class ApplicationService: Service,IApplicationService
         var applicationEntity = _mapper.Map<ApplicationEntity>(application);
         var applicationUpdated = await _unitOfWork.ApplicationRepository.Update(applicationEntity);
         await _unitOfWork.SaveChangesAsync();
-        applicationUpdated.Status = await _unitOfWork.ApplicationStatusRepository.GetById(applicationUpdated.StatusId);
+        var entityfromDB = await _unitOfWork.ApplicationRepository.GetById(applicationUpdated.Id);
         return new Response<ApplicationResponseDto>
         {
-            Data = _mapper.Map<ApplicationResponseDto>(applicationEntity),
+            Data = _mapper.Map<ApplicationResponseDto>(entityfromDB),
             Message = "Aplicacion actualizada con exito",
             Success = true
         };
