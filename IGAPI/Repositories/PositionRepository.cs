@@ -10,9 +10,9 @@ public class PositionRepository:Repository<PositionEntity>,IPositionRepository
     {
     }
 
-    public override Task<PositionEntity?> GetById(int id)
+    public override async Task<PositionEntity?> GetById(int id)
     {
-        return _dbSet.Where(position => position.Id == id)
+        return await _dbSet.Where(position => position.Id == id)
             .Include(position => position.Project)
             .Include(position =>position.Status)
             .Include(position => position.Area)
@@ -25,12 +25,13 @@ public class PositionRepository:Repository<PositionEntity>,IPositionRepository
 
     public override async Task<IEnumerable<PositionEntity>> GetAll()
     {
-        return _dbSet
+        return await _dbSet
             .Include(position => position.Project)
             .Include(position => position.Status)
             .Include(position => position.Area)
             .Include(position => position.Localization)
             .Include(position => position.Rol)
-            .Include(position => position.SubRol);
+            .Include(position => position.SubRol)
+            .ToListAsync();
     }
 }

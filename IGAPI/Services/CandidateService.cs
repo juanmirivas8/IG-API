@@ -67,9 +67,15 @@ public class CandidateService :Service, ICandidateService
         }
     }
 
-    public Task<Response<CandidateResponseDto>> GetById(int id)
+    public async Task<Response<CandidateResponseDto>> GetById(int id)
     {
-        throw new NotImplementedException();
+        var candidate = await _unitOfWork.CandidateRepository.GetById(id);
+        return new Response<CandidateResponseDto>
+        {
+            Data = _mapper.Map<CandidateResponseDto>(candidate),
+            Message = "Success",
+            Success = true
+        };
     }
 
     public async Task<Response<CandidateResponseDto>> Update(CandidatePutDto candidateDto)

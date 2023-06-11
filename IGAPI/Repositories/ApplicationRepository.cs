@@ -11,12 +11,21 @@ public class ApplicationRepository:Repository<ApplicationEntity>,IApplicationRep
     {
     }
 
-    public override Task<ApplicationEntity?> GetById(int id)
+    public override async Task<ApplicationEntity?> GetById(int id)
     {
-        return _dbSet.Where(entity => entity.Id == id)
+        return await _dbSet.Where(entity => entity.Id == id)
             .Include(x => x.Candidate)
             .Include(x => x.Position)
             .Include(x => x.Status)
             .FirstOrDefaultAsync(x => x.Id == id);
+    }
+    
+    public override async Task<IEnumerable<ApplicationEntity>> GetAll()
+    {
+        return await _dbSet
+            .Include(x => x.Candidate)
+            .Include(x => x.Position)
+            .Include(x => x.Status)
+            .ToListAsync();
     }
 }
