@@ -9,6 +9,6 @@ public interface IPositionService
     Task<Response<PositionResponseDto>> Update(PositionPutDto position);
     Task<Response<PositionResponseDto>> Delete(int id);
     Task<Response<IEnumerable<PositionResponseDto>>> GetAll();
-    Task<Response<PositionResponseDto>> GetById();
+    Task<Response<PositionResponseDto>> GetById(int id);
     
 }

@@ -2,6 +2,7 @@ using IGAPI.Controllers.interfaces;
 using IGAPI.Dtos;
 using IGAPI.Dtos.Candidate;
 using IGAPI.Services.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IGAPI.Controllers;
@@ -16,7 +17,7 @@ public class CandidateController:ControllerBase,ICandidateController
     {
         _candidateService= candidateService;
     }
-    [HttpPost]
+    [HttpPost,Authorize]
     [Route("Create")]
     public async Task<ActionResult<Response<CandidateResponseDto>>> Create([FromBody] CandidatePostDto candidate)
     {
@@ -24,7 +25,7 @@ public class CandidateController:ControllerBase,ICandidateController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpPut]
+    [HttpPut,Authorize]
     [Route("Update")]
     public async Task<ActionResult<Response<CandidateResponseDto>>> Update([FromBody] CandidatePutDto candidate)
     {
@@ -32,7 +33,7 @@ public class CandidateController:ControllerBase,ICandidateController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpDelete]
+    [HttpDelete,Authorize]
     [Route("Delete/{id}")]
     public async Task<ActionResult<Response<CandidateResponseDto>>> Delete(int id)
     {
@@ -40,7 +41,7 @@ public class CandidateController:ControllerBase,ICandidateController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpGet]
+    [HttpGet,Authorize]
     [Route("GetAll")]
     public async Task<ActionResult<Response<CandidateResponseDto>>> GetAll()
     {
@@ -48,4 +49,11 @@ public class CandidateController:ControllerBase,ICandidateController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
+    [HttpGet,Authorize]
+    [Route("GetById/{id}")]
+    public async Task<ActionResult<Response<CandidateResponseDto>>> GetById(int id)
+    {
+        var response = await _candidateService.GetById(id);
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
 }

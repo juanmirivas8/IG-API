@@ -3,6 +3,7 @@ using IGAPI.Dtos;
 using IGAPI.Dtos.Localization;
 using IGAPI.Repositories.Interfaces;
 using IGAPI.Services.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IGAPI.Controllers;
@@ -19,7 +20,7 @@ public class LookUpController: ControllerBase,ILookUpController
         _lookUpService = lookUpService;
     }
     
-    [HttpGet("GetAllLookUps")]
+    [HttpGet("GetAllLookUps"),Authorize]
     public async Task<ActionResult<Response<IEnumerable<ObjectWithKey>>>> GetAllLookUps()
     {
         var response = await _lookUpService.GetAllLookUps();

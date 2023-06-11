@@ -4,7 +4,7 @@ using IGAPI.Dtos.Position;
 using IGAPI.Services.interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata;
+
 
 namespace IGAPI.Controllers;
 [ApiController]
@@ -16,15 +16,15 @@ public class PositionController:ControllerBase,IPositionController
     {
         _positionService = positionService;
     }
-    //TODO: Implement authorization
-    [HttpPost("Create")]
+    [HttpPost,Authorize]
+    [Route("Create")]
     public async Task<ActionResult<Response<PositionResponseDto>>> CreatePosition([FromBody] PositionPostDto positionPostDto)
     {
         var response = await _positionService.CreatePosition(positionPostDto);
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpDelete]
+    [HttpDelete,Authorize]
     [Route("Delete/{id}")]
     public async Task<ActionResult<Response<PositionResponseDto>>> Delete(int id)
     {
@@ -32,7 +32,7 @@ public class PositionController:ControllerBase,IPositionController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpGet]
+    [HttpGet,Authorize]
     [Route("GetAll")]
     public async Task<ActionResult<Response<PositionResponseDto>>> GetAll()
     {
@@ -40,7 +40,15 @@ public class PositionController:ControllerBase,IPositionController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpPut]
+    [HttpGet,Authorize]
+    [Route("GetById/{id}")]
+    public async Task<ActionResult<Response<PositionResponseDto>>> GetById(int id)
+    {
+        var response = await _positionService.GetById(id);
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
+
+    [HttpPut,Authorize]
     [Route("Update")]
     public async Task<ActionResult<Response<PositionResponseDto>>> Update([FromBody] PositionPutDto positionPostDto)
     {

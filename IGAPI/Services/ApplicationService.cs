@@ -19,10 +19,11 @@ public class ApplicationService: Service,IApplicationService
         var applicationEntity = _mapper.Map<ApplicationEntity>(application);
         var applicationInserted = await _unitOfWork.ApplicationRepository.Add(applicationEntity);
         await _unitOfWork.SaveChangesAsync();
-        applicationInserted.Status = await _unitOfWork.ApplicationStatusRepository.GetById(applicationInserted.StatusId);
+        
+        var appFromDB =  await _unitOfWork.ApplicationRepository.GetById(applicationInserted.Id);
         return new Response<ApplicationResponseDto>
         {
-            Data = _mapper.Map<ApplicationResponseDto>(applicationInserted),
+            Data = _mapper.Map<ApplicationResponseDto>(appFromDB),
             Message = "Applicacion realizada con exito",
             Success = true
         };
@@ -66,9 +67,27 @@ public class ApplicationService: Service,IApplicationService
 
     }
 
-    public Task<Response<ApplicationResponseDto>> GetById(int id)
+    public async Task<Response<ApplicationResponseDto>> GetById(int id)
     {
-        throw new NotImplementedException();
+        var application = await _unitOfWork.ApplicationRepository.GetById(id);
+        
+        if (application != null)
+        {
+            return new Response<ApplicationResponseDto>
+            {
+                Data = _mapper.Map<ApplicationResponseDto>(application),
+                Message = "Operation successfull",
+                Success = true
+            };
+        }
+        else
+        {
+            return new Response<ApplicationResponseDto>
+            {
+                Message = "Application not found",
+                Success = false
+            };
+        }
     }
 
     public async Task<Response<ApplicationResponseDto>> Update(ApplicationPutDto application)

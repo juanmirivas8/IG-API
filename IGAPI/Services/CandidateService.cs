@@ -20,11 +20,11 @@ public class CandidateService :Service, ICandidateService
         var candidateEntity = _mapper.Map<CandidateEntity>(candidateDto);
         var candidateCreated = await _unitOfWork.CandidateRepository.Add(candidateEntity);
         await _unitOfWork.SaveChangesAsync();
-        candidateCreated.Status = await _unitOfWork.CandidateStatusRepository.GetById(candidateCreated.StatusId);
-        candidateCreated.ContactMethod = await _unitOfWork.ContactMethodRepository.GetById(candidateCreated.ContactMethodId);
+        
+        var candidateFromDB = await _unitOfWork.CandidateRepository.GetById(candidateCreated.Id);
         return new Response<CandidateResponseDto>
         {
-            Data = _mapper.Map<CandidateResponseDto>(candidateCreated),
+            Data = _mapper.Map<CandidateResponseDto>(candidateFromDB),
             Message = "Candidate Created succesfully",
             Success = true
         };

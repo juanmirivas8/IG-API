@@ -3,6 +3,7 @@ using IGAPI.Controllers.interfaces;
 using IGAPI.Dtos;
 using IGAPI.Dtos.Application;
 using IGAPI.Services.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IGAPI.Controllers;
@@ -17,7 +18,7 @@ public class ApplicationController: ControllerBase,IApplicationController
         _applicationService = applicationService;
     }
 
-    [HttpPost]
+    [HttpPost,Authorize]
     [Route("Create")]
     public async Task<ActionResult<Response<ApplicationResponseDto>>> Create([FromBody] ApplicationPostDto application)
     {
@@ -25,7 +26,7 @@ public class ApplicationController: ControllerBase,IApplicationController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpDelete]
+    [HttpDelete,Authorize]
     [Route("Delete/{id}")]
     public async Task<ActionResult<Response<ApplicationResponseDto>>> Delete(int id)
     {
@@ -33,7 +34,7 @@ public class ApplicationController: ControllerBase,IApplicationController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpPut]
+    [HttpPut,Authorize]
     [Route("Update")]
     public async Task<ActionResult<Response<ApplicationResponseDto>>> Update([FromBody] ApplicationPutDto application)
     {
@@ -41,11 +42,19 @@ public class ApplicationController: ControllerBase,IApplicationController
         return response.Success ? Ok(response) : BadRequest(response);
     }
 
-    [HttpGet]
+    [HttpGet,Authorize]
     [Route("GetAll")]
     public async Task<ActionResult<Response<ApplicationResponseDto>>> GetAll()
     {
         var response = await _applicationService.GetAll();
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
+
+    [HttpGet,Authorize]
+    [Route("GetById/{id}")]
+    public async Task<ActionResult<Response<ApplicationResponseDto>>> GetById(int id)
+    {
+        var response = await _applicationService.GetById(id);
         return response.Success ? Ok(response) : BadRequest(response);
     }
 }

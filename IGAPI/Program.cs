@@ -66,7 +66,7 @@ using (var scope = app.Services.CreateScope())
         .GetRequiredService<DataContext>();
     
     // Here is the migration executed
-    dbContext.Database.EnsureDeleted();
+    //dbContext.Database.EnsureDeleted();
     
     dbContext.Database.EnsureCreated();
 }

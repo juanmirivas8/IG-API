@@ -1,11 +1,10 @@
 using AutoMapper;
 using IGAPI.Dtos;
-using IGAPI.Dtos.Candidate;
 using IGAPI.Dtos.Position;
 using IGAPI.Models;
 using IGAPI.Repositories.Interfaces;
 using IGAPI.Services.interfaces;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace IGAPI.Services;
 
@@ -26,12 +25,9 @@ public class PositionService:Service,IPositionService
         }
         var entityFromInsert = await _unitOfWork.PositionRepository.Add(positionEntity);
         await _unitOfWork.SaveChangesAsync();
-        entityFromInsert.Area = await _unitOfWork.AreaRepository.GetById(entityFromInsert.AreaId);
-        entityFromInsert.Localization = await _unitOfWork.LocalizationRepository.GetById(entityFromInsert.LocalizationId);
-        entityFromInsert.Rol = await _unitOfWork.RolRepository.GetById(entityFromInsert.RolId);
-        entityFromInsert.SubRol = await _unitOfWork.SubRolRepository.GetById(entityFromInsert.SubRolId);
 
-        var positionResponseDto = _mapper.Map<PositionResponseDto>(entityFromInsert);
+        var positionFromDb = await _unitOfWork.PositionRepository.GetById(entityFromInsert.Id);
+        var positionResponseDto = _mapper.Map<PositionResponseDto>(positionFromDb);
         
         return new Response<PositionResponseDto>
         {
@@ -77,9 +73,27 @@ public class PositionService:Service,IPositionService
         }
     }
 
-    public Task<Response<PositionResponseDto>> GetById()
+    public async Task<Response<PositionResponseDto>> GetById(int id)
     {
-        throw new NotImplementedException();
+        var position = await _unitOfWork.PositionRepository.GetById(id);
+        
+        if (position != null)
+        {
+            return new Response<PositionResponseDto>
+            {
+                Data = _mapper.Map<PositionResponseDto>(position),
+                Message = "Position found",
+                Success = true
+            };
+        }
+        else
+        {
+            return new Response<PositionResponseDto>
+            {
+                Message = "Position not found",
+                Success = false
+            };
+        }
     }
 
     public async Task<Response<PositionResponseDto>> Update(PositionPutDto position)
@@ -87,14 +101,11 @@ public class PositionService:Service,IPositionService
         var positionEntity = _mapper.Map<PositionEntity>(position);
         var positionUpdated = await _unitOfWork.PositionRepository.Update(positionEntity);
         await _unitOfWork.SaveChangesAsync();
-        positionUpdated.Area = await _unitOfWork.AreaRepository.GetById(positionUpdated.AreaId);
-        positionUpdated.Localization = await _unitOfWork.LocalizationRepository.GetById(positionUpdated.LocalizationId);
-        positionUpdated.Rol = await _unitOfWork.RolRepository.GetById(positionUpdated.RolId);
-        positionUpdated.SubRol = await _unitOfWork.SubRolRepository.GetById(positionUpdated.SubRolId);
+   
         return new Response<PositionResponseDto>
         {
             Data = _mapper.Map<PositionResponseDto>(positionUpdated),
-            Message = "Posicion actualizada correctamente",
+            Message = "Position updated successfully",
             Success = true
         };
     }
