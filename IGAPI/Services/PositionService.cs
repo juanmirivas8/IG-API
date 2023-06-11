@@ -68,7 +68,7 @@ public class PositionService:Service,IPositionService
             return new Response<IEnumerable<PositionResponseDto>>
             {
                 Message = "Operacion fallida",
-                Success = false
+                Success = true
             };
         }
     }
@@ -101,10 +101,11 @@ public class PositionService:Service,IPositionService
         var positionEntity = _mapper.Map<PositionEntity>(position);
         var positionUpdated = await _unitOfWork.PositionRepository.Update(positionEntity);
         await _unitOfWork.SaveChangesAsync();
+        var entityFromDB = await _unitOfWork.PositionRepository.GetById(positionUpdated.Id);
    
         return new Response<PositionResponseDto>
         {
-            Data = _mapper.Map<PositionResponseDto>(positionUpdated),
+            Data = _mapper.Map<PositionResponseDto>(entityFromDB),
             Message = "Position updated successfully",
             Success = true
         };
