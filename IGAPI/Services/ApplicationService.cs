@@ -17,18 +17,20 @@ public class ApplicationService: Service,IApplicationService
     public async Task<Response<ApplicationResponseDto>> Create(ApplicationPostDto application)
     {
         var applicationEntity = _mapper.Map<ApplicationEntity>(application);
-        await _unitOfWork.ApplicationRepository.Add(applicationEntity);
+        var applicationInserted = await _unitOfWork.ApplicationRepository.Add(applicationEntity);
         await _unitOfWork.SaveChangesAsync();
+        applicationInserted.Status = await _unitOfWork.ApplicationStatusRepository.GetById(applicationInserted.StatusId);
         return new Response<ApplicationResponseDto>
         {
-            Data = _mapper.Map<ApplicationResponseDto>(applicationEntity),
+            Data = _mapper.Map<ApplicationResponseDto>(applicationInserted),
             Message = "Applicacion realizada con exito",
             Success = true
         };
     }
 
-    public async Task<Response<ApplicationResponseDto>> Delete(ApplicationPutDto application)
+    public async Task<Response<ApplicationResponseDto>> Delete(int id)
     {
+        var application = _unitOfWork.ApplicationRepository.GetById(id);
         var applicationEntity = _mapper.Map<ApplicationEntity>(application);
         await _unitOfWork.ApplicationRepository.Delete(applicationEntity);
         await _unitOfWork.SaveChangesAsync();
@@ -64,11 +66,17 @@ public class ApplicationService: Service,IApplicationService
 
     }
 
+    public Task<Response<ApplicationResponseDto>> GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Response<ApplicationResponseDto>> Update(ApplicationPutDto application)
     {
         var applicationEntity = _mapper.Map<ApplicationEntity>(application);
-        await _unitOfWork.ApplicationRepository.Update(applicationEntity);
+        var applicationUpdated = await _unitOfWork.ApplicationRepository.Update(applicationEntity);
         await _unitOfWork.SaveChangesAsync();
+        applicationUpdated.Status = await _unitOfWork.ApplicationStatusRepository.GetById(applicationUpdated.StatusId);
         return new Response<ApplicationResponseDto>
         {
             Data = _mapper.Map<ApplicationResponseDto>(applicationEntity),

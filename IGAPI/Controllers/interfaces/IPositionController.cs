@@ -7,4 +7,7 @@ namespace IGAPI.Controllers.interfaces;
 public interface IPositionController
 {
     Task<ActionResult<Response<PositionResponseDto>>> CreatePosition(PositionPostDto positionPostDto);
+    Task<ActionResult<Response<PositionResponseDto>>> Delete(int id);
+    Task<ActionResult<Response<PositionResponseDto>>> Update(PositionPutDto position);
+    Task<ActionResult<Response<PositionResponseDto>>> GetAll();
 }

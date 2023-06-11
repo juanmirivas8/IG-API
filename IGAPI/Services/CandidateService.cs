@@ -18,28 +18,28 @@ public class CandidateService :Service, ICandidateService
     public async Task<Response<CandidateResponseDto>> Create(CandidatePostDto candidateDto)
     {
         var candidateEntity = _mapper.Map<CandidateEntity>(candidateDto);
-        await _unitOfWork.CandidateRepository.Add(candidateEntity);
+        var candidateCreated = await _unitOfWork.CandidateRepository.Add(candidateEntity);
         await _unitOfWork.SaveChangesAsync();
-        var candidateResponseDto = _mapper.Map<CandidateResponseDto>(candidateEntity);
-
+        candidateCreated.Status = await _unitOfWork.CandidateStatusRepository.GetById(candidateCreated.StatusId);
+        candidateCreated.ContactMethod = await _unitOfWork.ContactMethodRepository.GetById(candidateCreated.ContactMethodId);
         return new Response<CandidateResponseDto>
         {
-            Data = candidateResponseDto,
+            Data = _mapper.Map<CandidateResponseDto>(candidateCreated),
             Message = "Candidate Created succesfully",
             Success = true
         };
     }
 
-    public async Task<Response<CandidateResponseDto>> Delete(CandidatePutDto candidateDto)
+    public async Task<Response<CandidateResponseDto>> Delete(int id)
     {
+        var candidateDto = _unitOfWork.CandidateRepository.GetById(id);
         var candidateEntity = _mapper.Map<CandidateEntity>(candidateDto);
-        var candidateDeleted = _mapper.Map<CandidateResponseDto>(candidateEntity);
-        await _unitOfWork.CandidateRepository.Delete(candidateEntity);
+        var candidateDeleted = await _unitOfWork.CandidateRepository.Delete(candidateEntity);
         await _unitOfWork.SaveChangesAsync();
 
         return new Response<CandidateResponseDto>
         {
-            Data = candidateDeleted,
+            Data = _mapper.Map<CandidateResponseDto>(candidateDeleted),
             Message = "Candidato eliminado correctamente",
             Success = true
         };
@@ -67,12 +67,19 @@ public class CandidateService :Service, ICandidateService
         }
     }
 
+    public Task<Response<CandidateResponseDto>> GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Response<CandidateResponseDto>> Update(CandidatePutDto candidateDto)
     {
         var candidateEntity = _mapper.Map<CandidateEntity>(candidateDto);
-        await _unitOfWork.CandidateRepository.Update(candidateEntity);
+        var candidateUpdated = await _unitOfWork.CandidateRepository.Update(candidateEntity);
         await _unitOfWork.SaveChangesAsync();
-        var candidateResponse = _mapper.Map<CandidateResponseDto>(candidateEntity);
+        candidateUpdated.Status = await _unitOfWork.CandidateStatusRepository.GetById(candidateUpdated.StatusId);
+        candidateUpdated.ContactMethod = await _unitOfWork.ContactMethodRepository.GetById(candidateUpdated.ContactMethodId);
+        var candidateResponse = _mapper.Map<CandidateResponseDto>(candidateUpdated);
 
         return new Response<CandidateResponseDto>
         {
