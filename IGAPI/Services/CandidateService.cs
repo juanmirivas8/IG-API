@@ -32,7 +32,7 @@ public class CandidateService :Service, ICandidateService
 
     public async Task<Response<CandidateResponseDto>> Delete(int id)
     {
-        var candidateDto = _unitOfWork.CandidateRepository.GetById(id);
+        var candidateDto = await _unitOfWork.CandidateRepository.GetById(id);
         var candidateEntity = _mapper.Map<CandidateEntity>(candidateDto);
         var candidateDeleted = await _unitOfWork.CandidateRepository.Delete(candidateEntity);
         await _unitOfWork.SaveChangesAsync();
