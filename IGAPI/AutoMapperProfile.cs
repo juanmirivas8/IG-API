@@ -63,12 +63,17 @@ public class AutoMapperProfile:Profile
             .ForMember(dest => dest.CandidateId, opt => opt.MapFrom(src => src.Candidate.Id))
             .ForMember(dest => dest.PositionId, opt => opt.MapFrom(src => src.Position.Id))
             .ForMember(dest => dest.StatusId, opt => opt.MapFrom(src => src.Status.Id))
-            .ForMember(dest => dest.Status, opt => opt.Ignore());
+            .ForMember(dest => dest.Status, opt => opt.Ignore())
+            .ForMember(dest => dest.Candidate, opt => opt.Ignore())
+            .ForMember(dest => dest.Position, opt => opt.Ignore());
         CreateMap<ApplicationPutDto, ApplicationEntity>()
             .ForMember(dest => dest.CandidateId, opt => opt.MapFrom(src => src.Candidate.Id))
             .ForMember(dest => dest.PositionId, opt => opt.MapFrom(src => src.Position.Id))
             .ForMember(dest => dest.StatusId, opt => opt.MapFrom(src => src.Status.Id))
-            .ForMember(dest => dest.Status, opt => opt.Ignore());
+            .ForMember(dest => dest.Status, opt => opt.Ignore())
+            .ForMember(dest => dest.Candidate, opt => opt.Ignore())
+            .ForMember(dest => dest.Position, opt => opt.Ignore());
+            
         CreateMap<ApplicationEntity, ApplicationResponseDto>();
            
         CreateMap<CandidatePostDto, CandidateEntity>()

@@ -39,7 +39,7 @@ public class PositionService:Service,IPositionService
 
     public async Task<Response<PositionResponseDto>> Delete(int id)
     {
-        var position = _unitOfWork.PositionRepository.GetById(id);
+        var position = await _unitOfWork.PositionRepository.GetById(id);
         var positionEntity = _mapper.Map<PositionEntity>(position);
         await _unitOfWork.PositionRepository.Delete(positionEntity);
         await _unitOfWork.SaveChangesAsync();

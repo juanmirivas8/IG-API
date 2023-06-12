@@ -31,7 +31,7 @@ public class ApplicationService: Service,IApplicationService
 
     public async Task<Response<ApplicationResponseDto>> Delete(int id)
     {
-        var application = _unitOfWork.ApplicationRepository.GetById(id);
+        var application = await _unitOfWork.ApplicationRepository.GetById(id);
         var applicationEntity = _mapper.Map<ApplicationEntity>(application);
         await _unitOfWork.ApplicationRepository.Delete(applicationEntity);
         await _unitOfWork.SaveChangesAsync();
