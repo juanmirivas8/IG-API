@@ -14,6 +14,9 @@ public class CandidateRepository:Repository<CandidateEntity>,ICandidateRepositor
    {
       return await _dbSet.Where(entity => entity.Id == id)
          .Include(x => x.Applications)
+            .ThenInclude(application => application.Status)
+         .Include(x => x.Applications)
+            .ThenInclude(application => application.Position)
          .Include(x => x.Status)
          .Include(x => x.ContactMethod)
          .FirstOrDefaultAsync(x => x.Id == id);

@@ -20,6 +20,9 @@ public class PositionRepository:Repository<PositionEntity>,IPositionRepository
             .Include(position => position.Rol)
             .Include(position => position.SubRol)
             .Include(position => position.Applications)
+                .ThenInclude(application => application.Status)
+            .Include(position => position.Applications)
+                .ThenInclude(application => application.Candidate)
             .FirstOrDefaultAsync();
     }
 

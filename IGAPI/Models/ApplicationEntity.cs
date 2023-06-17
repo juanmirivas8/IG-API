@@ -14,7 +14,7 @@ public class ApplicationEntity
     public virtual PositionEntity Position { get; set; }
     public int StatusId { get; set; }
     public virtual ApplicationStatusEntity Status { get; set; }
-    public string RejectionReason { get; set; }
+    public string? RejectionReason { get; set; }
     public string Description { get; set; }
     // TO IMPLEMENT:TECHNICAL TEST PDF REFERENCE
     
