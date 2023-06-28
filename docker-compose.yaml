@@ -1,5 +1,16 @@
 version: '3'
 services:
+  api:
+    image: igapi
+    restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_HTTPS_PORT=443
+    depends_on:
+      - db
   db:
     container_name: db
     image: mcr.microsoft.com/mssql/server:2022-latest
