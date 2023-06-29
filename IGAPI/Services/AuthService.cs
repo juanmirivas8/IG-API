@@ -14,11 +14,9 @@ namespace IGAPI.Services;
 public class AuthService:IAuthService
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IConfiguration _config;
-    public AuthService(IConfiguration config,IUnitOfWork unitOfWork)
+    public AuthService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _config = config;
     }
     public async Task<Response<bool>> Register(UserRequestDto request)
     {
@@ -93,7 +91,7 @@ public class AuthService:IAuthService
             new Claim(JwtRegisteredClaimNames.Email, responseData.Username)
         };
         
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_TOKEN")));
         
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
