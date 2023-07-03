@@ -1,5 +1,19 @@
 {
   "profiles": {
+    "local": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "local",
+        "JWT_TOKEN": "superClaveSecretaGalaxialXddd",
+        "CONNECTION_STRING": "Server=localhost,1433;Database=IG;User Id=sa;Password=Str0ngP@ssw0rd;Trusted_Connection=false;TrustServerCertificate=True;",
+        "ASPNETCORE_Kestrel__Certificates__Default__Password": "Str0ngP@ssw0rd",
+        "ASPNETCORE_Kestrel__Certificates__Default__Path": "../../cert.pfx"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5092;https://localhost:7122"
+    },
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
