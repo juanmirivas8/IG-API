@@ -1,18 +1,24 @@
 version: '3'
 services:
   api:
-    image: igapi
+    image: juanmirivas8/igapi
     restart: always
     ports:
       - "443:443"
       - "80:80"
     environment:
-      - ASPNETCORE_URLS=http://+:80
-      - ASPNETCORE_HTTPS_PORT=443
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_HTTPS_PORT: "443"
+      JWT_TOKEN: "superClaveSecretaGalaxialXddd"
+      CONNECTION_STRING: "Server=igapi-db-service,1433;Database=IG;User Id=sa;Password=Str0ngP@ssw0rd;Trusted_Connection=false;TrustServerCertificate=True;"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "Str0ngP@ssw0rd"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/certs/cert.pfx"
     depends_on:
-      - db
-  db:
-    container_name: db
+      - igapi-db-service
+    volumes:
+      - ./certs:/certs
+  igapi-db-service:
+    container_name: igapi-db
     image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
     environment:
