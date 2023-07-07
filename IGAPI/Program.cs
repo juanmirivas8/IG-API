@@ -56,13 +56,13 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name:"ngOrigins", policy =>
     {
-        policy.WithOrigins().AllowAnyHeader().AllowAnyMethod().SetIsOriginAllowed(origin => true).AllowCredentials();
+        policy.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
     });
 });
 
 var app = builder.Build();
 
-
+app.UseCors("ngOrigins");
 // Migrate latest database changes during startup
 using (var scope = app.Services.CreateScope())
 {
@@ -82,8 +82,6 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName.Equals("l
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors("ngOrigins");
 
 app.UseAuthorization();
 
